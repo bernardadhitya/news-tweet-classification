@@ -1,20 +1,20 @@
-// import {
-//   Grid,
-//   makeStyles,
-//   Modal
-// } from '@material-ui/core';
-// import React, {useState, useEffect} from 'react';
-// import { useHistory, useLocation } from 'react-router';
-// import { getAllProducts, getProductsByQueries } from '../../firebase';
-// import qs from 'query-string';
-// import './SearchPage.css';
-// import Pagination from '@material-ui/lab/Pagination';
-// import FilterModal from '../../Components/FilterModal/FilterModal';
-// import FilterListIcon from '@material-ui/icons/FilterList';
-// import ItemCard from '../../Components/ItemCard/ItemCard';
-// import { getAllCategories, getCategoriesByTopics } from '../../Constants/categories';
-// import { allMarketplaces } from '../../Constants/marketplaces';
-// import SortMenu from '../../Components/SortMenu/SortMenu';
+import {
+  Grid,
+  makeStyles,
+  Modal
+} from '@material-ui/core';
+import React, {useState, useEffect} from 'react';
+import { useHistory, useLocation } from 'react-router';
+import { getAllProducts, getProductsByQueries } from '../../firebase';
+import qs from 'query-string';
+import './SearchPage.css';
+import Pagination from '@material-ui/lab/Pagination';
+import FilterModal from '../../Components/FilterModal/FilterModal';
+import FilterListIcon from '@material-ui/icons/FilterList';
+import ItemCard from '../../Components/ItemCard/ItemCard';
+import { getAllCategories, getCategoriesByTopics } from '../../Constants/categories';
+import { allMarketplaces } from '../../Constants/marketplaces';
+import SortMenu from '../../Components/SortMenu/SortMenu';
 
 // var _ = require('lodash');
 
@@ -32,7 +32,7 @@
 //   },
 // }));
 
-// const SearchPage = () => {
+const SearchPage = () => {
 //   const classes = useStyles();
 //   const history = useHistory();
 //   const location = useLocation();
@@ -180,6 +180,6 @@
 //       </Modal>
 //     </div>
 //   )
-// }
+}
 
-// export default SearchPage;
+export default SearchPage;
