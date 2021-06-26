@@ -11,12 +11,13 @@ import './SearchPage.css';
 // import Pagination from '@material-ui/lab/Pagination';
 // import FilterModal from '../../Components/FilterModal/FilterModal';
 import FilterListIcon from '@material-ui/icons/FilterList';
-// import ItemCard from '../../Components/ItemCard/ItemCard';
+import ItemCard from '../../Components/ItemCard/ItemCard';
 // import { getAllCategories, getCategoriesByTopics } from '../../Constants/categories';
 // import { allMarketplaces } from '../../Constants/marketplaces';
 import SortMenu from '../../Components/SortMenu/SortMenu';
 import SearchBar from '../../Components/SearchBar/SearchBar';
 import { filterByMenu, sortByMenu } from '../../Constants/menu';
+import { getAllTweets } from '../../controller';
 
 // var _ = require('lodash');
 
@@ -48,6 +49,7 @@ const SearchPage = () => {
 //   const [selectedMarketplaces, setSelectedMarketplaces] = useState([]);
 //   const [selectedRating, setSelectedRating] = useState(null);
   // const [refresh, setRefresh] = useState(0);
+  const [tweets, setTweets] = useState([]);
   const [sortBy, setSortBy] = useState('-');
   const [anchorSortMenu, setAnchorSortMenu] = useState(null);
   const [filterBy, setFilterBy] = useState('all');
@@ -92,6 +94,14 @@ const SearchPage = () => {
 //     fetchData();
 //   }, [location, refresh, sortBy]);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const fetchedTweets = await getAllTweets();
+      setTweets(fetchedTweets);
+    }
+    fetchData();
+  }, []);
+
   const renderSortByMenu = () => {
     return (
       <div style={{display: 'flex', marginTop: '10px'}}>
@@ -120,29 +130,31 @@ const SearchPage = () => {
     )
   }
 
-//   const renderItemCards = () => {
-//     return items.length > 0 ? (
-//       <Grid container>
-//         { items[page-1].map(item => {
-//             const { product_id, image, title, price, source, rating } = item;
-//             return (
-//               <ItemCard
-//                 image={image}
-//                 title={title}
-//                 price={price}
-//                 source={source}
-//                 rating={rating}
-//                 productId={product_id}
-//               />
-//             )
-//         })}
-//       </Grid>
-//     ) : (
-//       <div style={{margin: '40px 0 0 40px'}}>
-//         <h3>Tidak menemukan barang yang anda cari</h3>
-//       </div>
-//     )
-//   }
+  const renderTweetCards = () => {
+    return tweets.length > 0 ? (
+      <Grid container>
+        { tweets.map(tweet => {
+            const { url, username, text, time, likes, retweets, profile_picture, category } = tweet;
+            return (
+              <ItemCard
+                url={url}
+                username={username}
+                text={text}
+                time={time}
+                likes={likes}
+                retweets={retweets}
+                profile_picture={profile_picture}
+                category={category}
+              />
+            )
+        })}
+      </Grid>
+    ) : (
+      <div style={{margin: '40px 0 0 40px'}}>
+        <h3>Tidak menemukan barang yang anda cari</h3>
+      </div>
+    )
+  }
 
 //   const handleFilterByPrice = (tempMinPrice, tempMaxPrice) => {
 //     setOpenModal(false);
@@ -170,7 +182,7 @@ const SearchPage = () => {
           </div>
         </Grid>
       </Grid>
-      {/* {renderItemCards()} */}
+      {renderTweetCards()}
       {/* <div className='pagination-container'>
         <Pagination
           count={Math.ceil(items.length)}

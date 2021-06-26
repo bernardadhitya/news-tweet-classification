@@ -1,5 +1,5 @@
 .item-card{
-  margin: 15px;
+  margin: 15px 30px 15px 0;
   border-radius: 10px;
   padding: 0;
   box-shadow: 0px 2px 9px 4px rgba(216,216,216,0.5);
@@ -9,7 +9,7 @@
 }
 
 .item-content{
-  padding: 0 20px 20px 20px;
+  padding: 20px;
 }
 
 .item-card .item-title{
@@ -51,4 +51,16 @@
   height: 24px;
   margin: 10px 0 0 0;
   align-items: right;
+}
+
+a, a:hover, a:focus, a:active {
+  text-decoration: none;
+  color: #272727;
+}
+
+.item-category {
+  display:inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1px solid rgba(0,0,0,0.1);
 }

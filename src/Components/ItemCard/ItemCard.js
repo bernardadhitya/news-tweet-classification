@@ -10,15 +10,17 @@ const ItemCard = (props) => {
     time,
     likes,
     retweets,
-    profile_picture
+    profile_picture,
+    category
   } = props;
 
   return (
     <Grid item xs={3}>
-      <a href={url} alt='' style={{textDecoration: 'none'}}>
+      <a href={url} alt=''>
         <div className='item-card'>
           <div className='item-content'>
             <div className='item-title'>{text}</div>
+            <div className='item-category'>{category}</div>
           </div>
         </div>
       </a>
