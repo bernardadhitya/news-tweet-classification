@@ -1,12 +1,27 @@
 import { Grid } from '@material-ui/core';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import './HomePage.css';
 import IconUpload from '../../Assets/icons/IconUpload';
+import axios from 'axios';
+import { uploadCsv } from '../../controller';
 
 const HomePage = () => {
 
+  const [selectedFile, setSelectedFile] = useState(null);
+
   const history = useHistory();
+
+  const onFileChange = (event) => {
+    setSelectedFile(event.target.files[0]);
+  };
+
+  const onFileUpload = async () => {
+    const result = await uploadCsv(selectedFile);
+    console.log(result)
+  };
+
+  console.log('file change:', selectedFile);
   
   return (
     <div className='home-page-wrapper'>
@@ -29,8 +44,14 @@ const HomePage = () => {
                   to its categories using AI
                 </div>
                 <div style={{fontFamily: 'galano-grotesque-medium', fontSize: '14px', marginTop: '14px'}}>
-                Upload a .csv file filled with tweets
+                  Upload a .csv file filled with tweets
                 </div>
+              </div>
+              <div>
+                <input type="file" onChange={onFileChange} />
+                <button onClick={onFileUpload}>
+                  Upload!
+                </button>
               </div>
               <div style={{display: 'flex'}}>
                 <div
