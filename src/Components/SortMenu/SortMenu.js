@@ -40,7 +40,7 @@ const StyledMenuItem = withStyles((theme) => ({
 }))(MenuItem);
 
 const SortMenu = (props) => {
-  const {anchorSortMenu, setAnchorSortMenu, setSortBy, sortBy} = props;
+  const {anchorSortMenu, setAnchorSortMenu, setSortBy, sortBy, menu} = props;
 
   const handleSortByClicked = (event) => {
     setAnchorSortMenu(event.currentTarget);
@@ -50,16 +50,10 @@ const SortMenu = (props) => {
     setAnchorSortMenu(null);
   };
 
-  const sortByText = {
-    'rating': 'Rating Tertinggi',
-    'lowest-fee': 'Harga Terendah',
-    'highest-fee': 'Harga Tertinggi'
-  }
   return (
-    <div style={{display: 'flex'}}>
-      <div style={{margin: '60px 10px 0 0'}}>Urutkan:</div>
+    <div>
       <div className='sort-button' onClick={handleSortByClicked}>
-        <h5>{sortByText[sortBy]}</h5>
+        <h5>{menu.filter(item => item.id === sortBy)[0].text}</h5>
         <ArrowDropDownIcon/>
       </div>
       <StyledMenu
@@ -69,18 +63,16 @@ const SortMenu = (props) => {
         open={Boolean(anchorSortMenu)}
         onClose={handleCloseSortMenu}
       >
-        <StyledMenuItem onClick={() => {setSortBy('lowest-fee'); handleCloseSortMenu()}}>
-          <ListItemText primary="Harga Terendah" />
-          <ListItemIcon/>
-        </StyledMenuItem>
-        <StyledMenuItem onClick={() => {setSortBy('highest-fee'); handleCloseSortMenu()}}>
-          <ListItemText primary="Harga Tertinggi" />
-          <ListItemIcon/>
-        </StyledMenuItem>
-        <StyledMenuItem onClick={() => {setSortBy('rating'); handleCloseSortMenu()}}>
-          <ListItemText primary="Rating Tertinggi" />
-          <ListItemIcon/>
-        </StyledMenuItem>
+        {
+          menu.map(item => {
+            return (
+              <StyledMenuItem onClick={() => {setSortBy(item.id); handleCloseSortMenu()}}>
+                <ListItemText primary={item.text} />
+                <ListItemIcon/>
+              </StyledMenuItem>
+            )
+          })
+        }
       </StyledMenu>
     </div>
   )

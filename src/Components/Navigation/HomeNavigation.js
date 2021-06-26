@@ -8,7 +8,7 @@ const HomeNavigation = () => {
     <Switch>
       <Route exact path='/'><Redirect to='/home'/></Route>
       <Route path='/home' component={HomePage}/>
-      {/* <Route path='/search' component={SearchPage}/> */}
+      <Route path='/search' component={SearchPage}/>
     </Switch>
   );
 };

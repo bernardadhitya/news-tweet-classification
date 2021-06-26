@@ -6,12 +6,14 @@ import SearchIcon from '@material-ui/icons/Search';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    padding: '2px 4px',
+    padding: '2px 4px 2px 16px',
     display: 'flex',
     alignItems: 'center',
     width: '100%',
     border: '1px solid rgba(0,0,0,0.1)',
-    borderRadius: '8px'
+    borderRadius: '8px',
+    margin: '20px 0',
+    boxShadow: '0px 2px 4px 2px rgba(216,216,216,0.4)'
   },
   input: {
     marginLeft: theme.spacing(1),

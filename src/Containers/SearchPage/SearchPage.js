@@ -4,17 +4,19 @@ import {
   Modal
 } from '@material-ui/core';
 import React, {useState, useEffect} from 'react';
-import { useHistory, useLocation } from 'react-router';
-import { getAllProducts, getProductsByQueries } from '../../firebase';
+// import { useHistory, useLocation } from 'react-router';
+// import { getAllProducts, getProductsByQueries } from '../../firebase';
 import qs from 'query-string';
 import './SearchPage.css';
-import Pagination from '@material-ui/lab/Pagination';
-import FilterModal from '../../Components/FilterModal/FilterModal';
+// import Pagination from '@material-ui/lab/Pagination';
+// import FilterModal from '../../Components/FilterModal/FilterModal';
 import FilterListIcon from '@material-ui/icons/FilterList';
-import ItemCard from '../../Components/ItemCard/ItemCard';
-import { getAllCategories, getCategoriesByTopics } from '../../Constants/categories';
-import { allMarketplaces } from '../../Constants/marketplaces';
+// import ItemCard from '../../Components/ItemCard/ItemCard';
+// import { getAllCategories, getCategoriesByTopics } from '../../Constants/categories';
+// import { allMarketplaces } from '../../Constants/marketplaces';
 import SortMenu from '../../Components/SortMenu/SortMenu';
+import SearchBar from '../../Components/SearchBar/SearchBar';
+import { filterByMenu, sortByMenu } from '../../Constants/menu';
 
 // var _ = require('lodash');
 
@@ -45,9 +47,11 @@ const SearchPage = () => {
 //   const [selectedCategories, setSelectedCategories] = useState([]);
 //   const [selectedMarketplaces, setSelectedMarketplaces] = useState([]);
 //   const [selectedRating, setSelectedRating] = useState(null);
-//   const [refresh, setRefresh] = useState(0);
-//   const [sortBy, setSortBy] = useState('rating');
-//   const [anchorSortMenu, setAnchorSortMenu] = useState(null);
+  // const [refresh, setRefresh] = useState(0);
+  const [sortBy, setSortBy] = useState('-');
+  const [anchorSortMenu, setAnchorSortMenu] = useState(null);
+  const [filterBy, setFilterBy] = useState('all');
+  const [anchorFilterMenu, setAnchorFilterMenu] = useState(null);
 
 //   const queries = qs.parse(location.search);
 
@@ -88,23 +92,33 @@ const SearchPage = () => {
 //     fetchData();
 //   }, [location, refresh, sortBy]);
 
-//   const renderSortByMenu = () => {
-//     return (
-//       <div style={{display: 'flex'}}>
-//         <SortMenu
-//           anchorSortMenu={anchorSortMenu}
-//           setAnchorSortMenu={setAnchorSortMenu}
-//           setSortBy={setSortBy}
-//           sortBy={sortBy}
-//         />
-//         <div style={{width: '10px'}}/>
-//         <div className='filter-button' onClick={() => setOpenModal(true)}>
-//           <FilterListIcon style={{marginRight: '8px', color: 'rgba(0,0,0,0.7)'}}/>
-//           <p>Filter</p>
-//         </div>
-//       </div>
-//     )
-//   }
+  const renderSortByMenu = () => {
+    return (
+      <div style={{display: 'flex', marginTop: '10px'}}>
+        <div style={{fontFamily: 'galano-grotesque-medium', margin: '20px'}}>
+          Sort By:
+        </div>
+        <SortMenu
+          anchorSortMenu={anchorSortMenu}
+          setAnchorSortMenu={setAnchorSortMenu}
+          setSortBy={setSortBy}
+          sortBy={sortBy}
+          menu={sortByMenu}
+        />
+        <div style={{width: '10px'}}/>
+        <div style={{fontFamily: 'galano-grotesque-medium', margin: '20px'}}>
+          Filter By:
+        </div>
+        <SortMenu
+          anchorSortMenu={anchorFilterMenu}
+          setAnchorSortMenu={setAnchorFilterMenu}
+          setSortBy={setFilterBy}
+          sortBy={filterBy}
+          menu={filterByMenu}
+        />
+      </div>
+    )
+  }
 
 //   const renderItemCards = () => {
 //     return items.length > 0 ? (
@@ -138,48 +152,35 @@ const SearchPage = () => {
 //     })
 //   }
 
-//   return (
-//     <div style={{margin: '20px 100px'}}>
-//       <Grid container>
-//         <Grid item xs={8}>
-//           {
-//             !!searchQuery &&
-//             <p style={{margin: '60px 0 0 20px'}}>
-//               Menampilkan hasil pencarian untuk <span style={{color: '#57946C'}}>{`"${searchQuery}"`}</span>
-//             </p>
-//           }
-//         </Grid>
-//         <Grid item xs={4}>
-//           <div style={{float: 'right', marginRight: '30px'}}>
-//             {renderSortByMenu()}
-//           </div>
-//         </Grid>
-//       </Grid>
-//       {renderItemCards()}
-//       <div className='pagination-container'>
-//         <Pagination
-//           count={Math.ceil(items.length)}
-//           shape="rounded"
-//           page={page}
-//           onChange={(event, value) => setPage(value)}
-//         />
-//       </div>
-//       <Modal
-//         open={openModal}
-//         onClose={() => setOpenModal(false)}
-//         className={classes.modal}
-//       >
-//         <FilterModal
-//           handleMinPrice={setMinPrice}
-//           handleMaxPrice={setMaxPrice}
-//           handleSelectedCategories={setSelectedCategories}
-//           handleSelectedMarketplaces={setSelectedMarketplaces}
-//           handleSelectedRating={setSelectedRating}
-//           handleCloseModal={() => {setOpenModal(false); setRefresh(refresh + 1)}}
-//         />
-//       </Modal>
-//     </div>
-//   )
+  return (
+    <div style={{margin: '60px 100px'}}>
+      <div style={{
+        fontFamily: 'galano-grotesque-bold',
+        fontSize: '36px'
+      }}>
+        News Tweet Classification
+      </div>
+      <Grid container>
+        <Grid item xs={6}>
+          <SearchBar/>
+        </Grid>
+        <Grid item xs={6}>
+          <div style={{float: 'right', marginRight: '30px'}}>
+            {renderSortByMenu()}
+          </div>
+        </Grid>
+      </Grid>
+      {/* {renderItemCards()} */}
+      {/* <div className='pagination-container'>
+        <Pagination
+          count={Math.ceil(items.length)}
+          shape="rounded"
+          page={page}
+          onChange={(event, value) => setPage(value)}
+        />
+      </div> */}
+    </div>
+  )
 }
 
 export default SearchPage;
