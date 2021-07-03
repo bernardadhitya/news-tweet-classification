@@ -15,15 +15,25 @@ const SearchPage = () => {
   const [anchorSortMenu, setAnchorSortMenu] = useState(null);
   const [filterBy, setFilterBy] = useState('all');
   const [anchorFilterMenu, setAnchorFilterMenu] = useState(null);
+  const [searchString, setSearchString] = useState('');
 
   const location = useLocation();
 
   useEffect(() => {
     const fetchData = async () => {
-      setTweets(location.state.tweets);
+      const fetchedTweets = location.state.tweets;
+      const filteredTweetsBySearch = fetchedTweets.filter(tweet =>
+        tweet.text.toLowerCase().includes(searchString.toLowerCase()) 
+        || tweet.username.toLowerCase().includes(searchString.toLowerCase())
+      );
+      const filteredTweetsByCategory = filterBy === 'all' ? filteredTweetsBySearch :
+      filteredTweetsBySearch.filter(tweet =>
+        tweet.category.toLowerCase() === filterBy.toLowerCase()
+      )
+      setTweets(filteredTweetsByCategory);
     }
     fetchData();
-  }, []);
+  }, [searchString, filterBy]);
 
   const renderSortByMenu = () => {
     return (
@@ -89,7 +99,9 @@ const SearchPage = () => {
       </div>
       <Grid container>
         <Grid item xs={6}>
-          <SearchBar/>
+          <SearchBar
+            handleSearch={(value) => setSearchString(value)}
+          />
         </Grid>
         <Grid item xs={6}>
           <div style={{float: 'right', marginRight: '30px'}}>
