@@ -3,6 +3,8 @@ import moment from 'moment';
 import React from 'react';
 import { filterByMenu } from '../../Constants/menu';
 import './ItemCard.css';
+import LoopIcon from '@material-ui/icons/Loop';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 
 const ItemCard = (props) => {
   const {
@@ -41,8 +43,10 @@ const ItemCard = (props) => {
             <div className='item-content-flex'>
               {getFormattedDate()}
             </div>
-            <div className='item-content-flex'>
-              {`${likes} Likes    ${retweets} Retweets`}
+            <div className='item-content-flex' style={{fontSize: '14px'}}>
+              <FavoriteBorderIcon style={{color: '#01A1F5', fontSize: '14px'}}/>{likes}
+              <div style={{width: '20px'}}></div>
+              <LoopIcon style={{color: '#01A1F5', fontSize: '14px'}}/>{retweets}
             </div>
             <div className='item-category'>{getCategoryString()}</div>
           </div>

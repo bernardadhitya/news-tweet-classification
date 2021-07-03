@@ -15,6 +15,7 @@
 .item-content-flex{
   display: flex;
   margin-bottom: 10px;
+  align-items: center;
 }
 
 .item-profile-picture{
