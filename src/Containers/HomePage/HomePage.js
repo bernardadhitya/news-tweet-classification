@@ -1,26 +1,30 @@
 import { Grid } from '@material-ui/core';
-import React, { useEffect, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import './HomePage.css';
 import IconUpload from '../../Assets/icons/IconUpload';
-import axios from 'axios';
 import { uploadCsv } from '../../controller';
 
 const HomePage = () => {
 
-  const [selectedFile, setSelectedFile] = useState(null);
+  const hiddenFileInput = useRef(null);
 
   const history = useHistory();
 
-  const onFileChange = (event) => {
-    setSelectedFile(event.target.files[0]);
+  const onFileUpload = async (event) => {
+    const result = await uploadCsv(event.target.files[0]);
+    console.log(result);
+    history.push({
+      pathname: '/search',
+      state: {
+        tweets: result
+      }
+    });
   };
 
-  const onFileUpload = async () => {
-    console.log('selected file to upload:', selectedFile);
-    const result = await uploadCsv(selectedFile);
-    console.log(result)
-  };
+  const handleUploadButtonClicked = () => {
+    hiddenFileInput.current.click();
+  }
   
   return (
     <div className='home-page-wrapper'>
@@ -47,20 +51,20 @@ const HomePage = () => {
                 </div>
               </div>
               <div>
-                <input type="file" onChange={onFileChange} />
-                <button onClick={onFileUpload}>
+                <input
+                  type="file"
+                  onChange={onFileUpload}
+                  style={{display: 'none'}}
+                  ref={hiddenFileInput}
+                />
+                {/* <button onClick={onFileUpload}>
                   Upload!
-                </button>
+                </button> */}
               </div>
               <div style={{display: 'flex'}}>
                 <div
                   className='home-upload-csv-button'
-                  onClick={() => history.push({
-                    pathname: '/search',
-                    state: {
-                      filterModalOpen: true
-                    }
-                  })}
+                  onClick={() => handleUploadButtonClicked()}
                 >
                   <IconUpload />
                   <div style={{width: '8px'}}/>
