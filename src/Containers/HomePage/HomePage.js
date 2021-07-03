@@ -17,11 +17,10 @@ const HomePage = () => {
   };
 
   const onFileUpload = async () => {
+    console.log('selected file to upload:', selectedFile);
     const result = await uploadCsv(selectedFile);
     console.log(result)
   };
-
-  console.log('file change:', selectedFile);
   
   return (
     <div className='home-page-wrapper'>
