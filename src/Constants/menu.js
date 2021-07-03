@@ -16,23 +16,21 @@ export const sortByMenu = [
     text: 'Recently Posted'
   },
   {
-    id: 'oldes',
+    id: 'oldest',
     text: 'Oldest Post'
   },
 ];
 
 export const filterByMenu = [
   {id: 'all', text: 'All'},
-  {id: 'business', text: 'Business'},
-  {id: 'automotive', text: 'Automotive'},
-  {id: 'entertainment', text: 'Entertainment'},
-  {id: 'family', text: 'Family'},
-  {id: 'health', text: 'Health'},
-  {id: 'politics', text: 'Politics'},
-  {id: 'religion', text: 'Religion'},
-  {id: 'science', text: 'Science'},
-  {id: 'sports', text: 'Sports'},
-  {id: 'technology', text: 'Technology'},
-  {id: 'travel', text: 'Travel'},
-  {id: 'world', text: 'World'}
+  {id: 'science', text: '🧬 Science'},
+  {id: 'politics', text: '🤝 Politics'},
+  {id: 'sports', text: '⚽️ Sport'},
+  {id: 'business', text: '📊 Business'},
+  {id: 'lifestyle', text: '👨‍👩‍👦 Lifestyle'},
+  {id: 'weather', text: '🌦 Weather'},
+  {id: 'entertainment', text: '🍿 Entertainment'},
+  {id: 'technology', text: '💻 Technology'},
+  {id: 'health', text: '🏥 Health'},
+  {id: 'others', text: '📰 Others'},
 ];

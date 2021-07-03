@@ -12,6 +12,20 @@
   padding: 20px;
 }
 
+.item-content-flex{
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.item-profile-picture{
+  height: 20px;
+  border-radius: 10px;
+}
+
+.item-username{
+  margin-left: 4px;
+}
+
 .item-card .item-title{
   font-weight: 500;
   margin: 10px 0;
