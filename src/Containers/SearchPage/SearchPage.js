@@ -9,6 +9,7 @@ import SearchBar from '../../Components/SearchBar/SearchBar';
 import { filterByMenu, sortByMenu } from '../../Constants/menu';
 import { useLocation } from 'react-router-dom';
 import moment from 'moment';
+import { Pagination } from '@material-ui/lab';
 
 const SearchPage = () => {
   const [tweets, setTweets] = useState([]);
@@ -17,6 +18,7 @@ const SearchPage = () => {
   const [filterBy, setFilterBy] = useState('all');
   const [anchorFilterMenu, setAnchorFilterMenu] = useState(null);
   const [searchString, setSearchString] = useState('');
+  const [page, setPage] = useState(1);
 
   const location = useLocation();
 
@@ -43,7 +45,11 @@ const SearchPage = () => {
           return moment(a.time).diff(moment(b.time));
         }
       })
-      setTweets(sortedTweets);
+      let groupedTweets = [];
+      while (sortedTweets.length > 0) {
+        groupedTweets.push(sortedTweets.splice(0,20))
+      }
+      setTweets(groupedTweets);
     }
     fetchData();
   }, [searchString, filterBy, sortBy]);
@@ -79,7 +85,7 @@ const SearchPage = () => {
   const renderTweetCards = () => {
     return tweets.length > 0 ? (
       <Grid container>
-        { tweets.map(tweet => {
+        { tweets[page-1].map(tweet => {
             const { url, username, text, time, likes, retweets, profile_picture, category } = tweet;
             return (
               <ItemCard
@@ -123,6 +129,14 @@ const SearchPage = () => {
         </Grid>
       </Grid>
       {renderTweetCards()}
+      <div className='pagination-container'>
+        <Pagination
+          count={Math.ceil(tweets.length)}
+          shape="rounded"
+          page={page}
+          onChange={(event, value) => setPage(value)}
+        />
+      </div>
     </div>
   )
 }

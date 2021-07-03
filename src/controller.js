@@ -2,7 +2,7 @@ import axios from 'axios';
 var FormData = require('form-data');
 var fs = require('fs');
 
-const service = 'http://23eec9c67a2b.ngrok.io';
+const service = 'http://09816b3ba270.ngrok.io';
 
 export const getAllTweets = async () => {
   const response = await axios.get(`${service}/tweets`);
