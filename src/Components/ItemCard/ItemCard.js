@@ -41,6 +41,9 @@ const ItemCard = (props) => {
             <div className='item-content-flex'>
               {getFormattedDate()}
             </div>
+            <div className='item-content-flex'>
+              {`${likes} Likes    ${retweets} Retweets`}
+            </div>
             <div className='item-category'>{getCategoryString()}</div>
           </div>
         </div>

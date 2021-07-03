@@ -8,6 +8,7 @@ import SortMenu from '../../Components/SortMenu/SortMenu';
 import SearchBar from '../../Components/SearchBar/SearchBar';
 import { filterByMenu, sortByMenu } from '../../Constants/menu';
 import { useLocation } from 'react-router-dom';
+import moment from 'moment';
 
 const SearchPage = () => {
   const [tweets, setTweets] = useState([]);
@@ -30,10 +31,22 @@ const SearchPage = () => {
       filteredTweetsBySearch.filter(tweet =>
         tweet.category.toLowerCase() === filterBy.toLowerCase()
       )
-      setTweets(filteredTweetsByCategory);
+      const sortedTweets = sortBy === '-' ? filteredTweetsByCategory :
+      filteredTweetsByCategory.sort((a,b) => {
+        if (sortBy === 'retweets') {
+          return b.retweets - a.retweets;
+        } else if (sortBy === 'likes') {
+          return b.likes - a.likes;
+        } else if (sortBy === 'recent') {
+          return moment(b.time).diff(moment(a.time));
+        } else if (sortBy === 'oldest') {
+          return moment(a.time).diff(moment(b.time));
+        }
+      })
+      setTweets(sortedTweets);
     }
     fetchData();
-  }, [searchString, filterBy]);
+  }, [searchString, filterBy, sortBy]);
 
   const renderSortByMenu = () => {
     return (

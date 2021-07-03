@@ -57,9 +57,6 @@ const HomePage = () => {
                   style={{display: 'none'}}
                   ref={hiddenFileInput}
                 />
-                {/* <button onClick={onFileUpload}>
-                  Upload!
-                </button> */}
               </div>
               <div style={{display: 'flex'}}>
                 <div
