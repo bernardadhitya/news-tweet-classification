@@ -1,13 +1,12 @@
 import axios from 'axios';
 var FormData = require('form-data');
-var fs = require('fs');
 
-const service = 'http://09816b3ba270.ngrok.io';
+const service = 'http://4fb315656044.ngrok.io';
 
 export const getAllTweets = async () => {
   const response = await axios.get(`${service}/tweets`);
   try {
-    return response.data;
+    return response.data.tweets;
   } catch (error) {
     return [];
   }
@@ -20,7 +19,6 @@ export const uploadCsv = async (selectedFile) => {
     selectedFile,
   );
   const response = await axios.post(`${service}/tweets/upload`, formData);
-  const data = response.data.tweets;
 
-  return data;
+  return response.data.tweets;
 }

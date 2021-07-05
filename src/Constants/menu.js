@@ -1,9 +1,5 @@
 export const sortByMenu = [
   {
-    id: '-',
-    text: '-'
-  },
-  {
     id: 'retweets',
     text: 'Most Retweets'
   },
