@@ -1,6 +1,5 @@
 import axios from 'axios';
 var FormData = require('form-data');
-var fs = require('fs');
 
 const service = 'http://09816b3ba270.ngrok.io';
 
@@ -20,7 +19,5 @@ export const uploadCsv = async (selectedFile) => {
     selectedFile,
   );
   const response = await axios.post(`${service}/tweets/upload`, formData);
-  const data = response.data.tweets;
-
-  return data;
+  return response.data.tweets;
 }
