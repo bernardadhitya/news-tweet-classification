@@ -10,10 +10,11 @@ import { filterByMenu, sortByMenu } from '../../Constants/menu';
 import { useLocation } from 'react-router-dom';
 import moment from 'moment';
 import { Pagination } from '@material-ui/lab';
+import { getAllTweets } from '../../controller';
 
 const SearchPage = () => {
   const [tweets, setTweets] = useState([]);
-  const [sortBy, setSortBy] = useState('-');
+  const [sortBy, setSortBy] = useState('recent');
   const [anchorSortMenu, setAnchorSortMenu] = useState(null);
   const [filterBy, setFilterBy] = useState('all');
   const [anchorFilterMenu, setAnchorFilterMenu] = useState(null);
@@ -24,7 +25,8 @@ const SearchPage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const fetchedTweets = location.state.tweets;
+      const fetchedTweets = await getAllTweets();
+      
       const filteredTweetsBySearch = fetchedTweets.filter(tweet =>
         tweet.text.toLowerCase().includes(searchString.toLowerCase()) 
         || tweet.username.toLowerCase().includes(searchString.toLowerCase())
@@ -33,8 +35,7 @@ const SearchPage = () => {
       filteredTweetsBySearch.filter(tweet =>
         tweet.category.toLowerCase() === filterBy.toLowerCase()
       )
-      const sortedTweets = sortBy === '-' ? filteredTweetsByCategory :
-      filteredTweetsByCategory.sort((a,b) => {
+      const sortedTweets = filteredTweetsByCategory.sort((a,b) => {
         if (sortBy === 'retweets') {
           return b.retweets - a.retweets;
         } else if (sortBy === 'likes') {
