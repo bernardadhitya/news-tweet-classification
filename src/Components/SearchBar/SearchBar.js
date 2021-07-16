@@ -37,8 +37,8 @@ const SearchBar = (props) => {
     <div className={classes.root}>
       <InputBase
         className={classes.input}
-        placeholder="Cari Produk Alat Dapur"
-        inputProps={{ 'aria-label': 'Cari Produk Alat Dapur' }}
+        placeholder="Search for tweets"
+        inputProps={{ 'aria-label': 'Search for tweets' }}
         onKeyPress={(e) => {
           if (e.key === 'Enter') {
             e.preventDefault();
