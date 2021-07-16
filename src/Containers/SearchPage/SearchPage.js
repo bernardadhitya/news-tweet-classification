@@ -51,6 +51,7 @@ const SearchPage = () => {
         groupedTweets.push(sortedTweets.splice(0,20))
       }
       setTweets(groupedTweets);
+      setPage(1);
     }
     fetchData();
   }, [searchString, filterBy, sortBy]);
@@ -104,7 +105,7 @@ const SearchPage = () => {
       </Grid>
     ) : (
       <div style={{margin: '40px 0 0 40px'}}>
-        <h3>Tidak menemukan barang yang anda cari</h3>
+        <h3>No tweets are available. Please try again...</h3>
       </div>
     )
   }

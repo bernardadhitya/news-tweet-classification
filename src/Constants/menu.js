@@ -21,7 +21,7 @@ export const filterByMenu = [
   {id: 'all', text: 'All'},
   {id: 'science', text: '🧬 Science'},
   {id: 'politics', text: '🤝 Politics'},
-  {id: 'sports', text: '⚽️ Sport'},
+  {id: 'sport', text: '⚽️ Sport'},
   {id: 'business', text: '📊 Business'},
   {id: 'lifestyle', text: '👨‍👩‍👦 Lifestyle'},
   {id: 'weather', text: '🌦 Weather'},
