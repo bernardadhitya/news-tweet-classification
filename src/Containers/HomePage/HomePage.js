@@ -2,7 +2,6 @@ import { Grid } from '@material-ui/core';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import './HomePage.css';
-import IconUpload from '../../Assets/icons/IconUpload';
 
 const HomePage = () => {
 

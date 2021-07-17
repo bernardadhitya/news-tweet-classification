@@ -7,7 +7,6 @@ import ItemCard from '../../Components/ItemCard/ItemCard';
 import SortMenu from '../../Components/SortMenu/SortMenu';
 import SearchBar from '../../Components/SearchBar/SearchBar';
 import { filterByMenu, sortByMenu } from '../../Constants/menu';
-import { useLocation } from 'react-router-dom';
 import moment from 'moment';
 import { Pagination } from '@material-ui/lab';
 import { getAllTweets } from '../../controller';
@@ -20,8 +19,6 @@ const SearchPage = () => {
   const [anchorFilterMenu, setAnchorFilterMenu] = useState(null);
   const [searchString, setSearchString] = useState('');
   const [page, setPage] = useState(1);
-
-  const location = useLocation();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,6 +41,8 @@ const SearchPage = () => {
           return moment(b.time).diff(moment(a.time));
         } else if (sortBy === 'oldest') {
           return moment(a.time).diff(moment(b.time));
+        } else {
+          return moment(b.time).diff(moment(a.time));
         }
       })
       let groupedTweets = [];
